@@ -10,7 +10,14 @@ import userRoutes from './routes/user.route.js';
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://linked-in-mern-b5tq.vercel.app', // Match your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow all necessary methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow required headers
+  credentials: true, // Allow credentials if needed
+}));
+
+app.options('*', cors());
 app.use(express.json());
 
 connectDB();
