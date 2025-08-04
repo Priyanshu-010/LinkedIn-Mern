@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../context/contexts';
+import axiosInstance from '../utils/axios';
 
 
 function Register() {
@@ -15,7 +15,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
+      const res = await axiosInstance.post("/auth/register", {
         name,
         email,
         password,

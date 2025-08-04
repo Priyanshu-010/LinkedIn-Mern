@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-// import { useContext } from 'react';
-// import { AuthContext } from '../context/AuthContext.jsx';
 import ProfileCard from '../components/ProfileCard.jsx';
 import PostCard from '../components/PostCard.jsx';
+import axiosInstance from '../utils/axios.js';
 
 function Profile() {
-  // const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -15,7 +12,7 @@ function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/${id}`);
+        const res = await axiosInstance.get(`/users/${id}`);
         setProfile(res.data);
         setPosts(res.data.posts || []);
       } catch (err) {

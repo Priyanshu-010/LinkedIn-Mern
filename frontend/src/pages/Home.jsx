@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import PostCard from '../components/PostCard.jsx';
-import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../context/contexts.js';
+import axiosInstance from '../utils/axios.js';
 
 
 function Home() {
@@ -13,7 +13,7 @@ function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`);
+        const res = await axiosInstance.get(`/posts`);
         setPosts(res.data);
       } catch (err) {
         console.error(err);
@@ -27,8 +27,8 @@ function Home() {
     if (!content.trim()) return;
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/posts`,
+      const res = await axiosInstance.post(
+        `/posts`,
         { content },
         { headers: { Authorization: `Bearer ${token}` } }
       );
