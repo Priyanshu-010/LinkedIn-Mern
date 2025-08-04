@@ -1,11 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext, ThemeContext } from '../context/contexts';
+import { AuthContext } from '../context/contexts';
 
 
 function Navbar() {
   const { user, updateUser } = useContext(AuthContext);
-  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -52,13 +51,6 @@ function Navbar() {
               </Link>
             </>
           )}
-          <button
-            onClick={toggleTheme}
-            className="text-white hover:text-yellow-300 transition duration-300 focus:outline-none dark:text-gray-200 dark:hover:text-yellow-400"
-            aria-label="Toggle theme"
-          >
-            {isDarkMode ? '☀️' : '🌙'}
-          </button>
         </div>
       </div>
     </nav>
